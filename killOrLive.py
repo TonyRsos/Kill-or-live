@@ -12,3 +12,8 @@ class Enemigo(Personaje):
     
     def __init__(self, nombre, fuerza, inteligencia, defensa, vida):
         super().__init__(nombre, fuerza, inteligencia, defensa, vida)
+        
+class Protagonista(Personaje):
+    
+    def __init__(self, nombre, fuerza, inteligencia, defensa, vida):
+        super().__init__(nombre, fuerza, inteligencia, defensa, vida)
