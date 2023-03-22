@@ -3,7 +3,6 @@ from dataclasses import dataclass
 @dataclass
 class Caracteristicas:
     poder_posible = ['Fuego', 'Aire', 'Agua', 'Rayo', 'Tierra', 'Oscuridad']
-    enemigo_posible = ['Enano', 'Gigante', 'Mago']
     
     nombre: str
     tipo_de_poder: str
@@ -19,11 +18,6 @@ class Caracteristicas:
         else:
             return self.poder_posible[0]
         
-    def validar_tipo_enemigo(self, tipo_enemigo):
-        if tipo_enemigo in self.enemigo_posible:
-            return tipo_enemigo
-        else:
-            return self.enemigo_posible[0]
 
 
 class Personaje:
@@ -38,9 +32,15 @@ class Personaje:
         
         
 class Enemigo(Personaje):
+    enemigo_posible = ['Enano', 'Gigante', 'Mago']
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
          
+    def validar_tipo_enemigo(self, tipo_enemigo):
+        if tipo_enemigo in self.enemigo_posible:
+            return tipo_enemigo
+        else:
+            return self.enemigo_posible[0]
 class Protagonista(Personaje):
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
