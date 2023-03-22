@@ -44,4 +44,3 @@ class Enemigo(Personaje):
 class Protagonista(Personaje):
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
-        
