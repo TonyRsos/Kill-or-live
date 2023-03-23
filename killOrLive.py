@@ -6,7 +6,6 @@ class Caracteristicas:
     
     nombre: str
     tipo_de_poder: str
-    tipo_enemigo = str
     fuerza: int = 0
     inteligencia: int = 0
     defensa: int = 0
@@ -18,8 +17,6 @@ class Caracteristicas:
         else:
             return self.poder_posible[0]
         
-
-
 class Personaje:
     def __init__(self, caracteristicas):
         self.nombre = caracteristicas.nombre
@@ -28,12 +25,12 @@ class Personaje:
         self.defensa = caracteristicas.defensa
         self.vida = caracteristicas.vida
         self.tipo_de_poder = caracteristicas.validar_tipo_de_poder(caracteristicas.tipo_de_poder)
-        self.tipo_enemigo = caracteristicas.validar_tipo_enemigo(caracteristicas.tipo_enemigo)
         
         
 class Enemigo(Personaje):
     enemigo_posible = ['Enano', 'Gigante', 'Mago']
-    def __init__(self, caracteristicas):
+    def __init__(self,tipo_enemigo, caracteristicas):
+        self.tipo_enemigo = self.validar_tipo_enemigo(tipo_enemigo)
         super().__init__(caracteristicas)
          
     def validar_tipo_enemigo(self, tipo_enemigo):
@@ -41,6 +38,7 @@ class Enemigo(Personaje):
             return tipo_enemigo
         else:
             return self.enemigo_posible[0]
+
 class Protagonista(Personaje):
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
