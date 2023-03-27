@@ -41,7 +41,8 @@ class Personaje:
 class Enemigo(Personaje):
     enemigo_posible = {
         'Enano': {'nombre':'Hassbulla', 'fuerza':100, 'inteligencia':100, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Fuego'},
-        'Mago': {'nombre':'El mago miado', 'fuerza':1000, 'inteligencia':50, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Aire'}
+        'Mago': {'nombre':'El mago miado', 'fuerza':1000, 'inteligencia':50, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Aire'},
+        'Gigante': {'nombre':'Big Show', 'fuerza':1500, 'inteligencia':50, 'defensa':50, 'vida':100, 'tipo_de_poder': 'Oscuridad'}
     }
     
     def __init__(self,tipo_enemigo):
