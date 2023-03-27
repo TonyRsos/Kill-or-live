@@ -26,12 +26,27 @@ class Personaje:
         self.vida = caracteristicas.vida
         self.tipo_de_poder = caracteristicas.validar_tipo_de_poder(caracteristicas.tipo_de_poder)
         
+    def __repr__(self):
+        representation = f"""
+        Nombre: {self.nombre}
+        Fuerza: {self.fuerza}
+        Inteligencia: {self.inteligencia}
+        Defensa: {self.defensa}
+        Vida: {self.vida}
+        Tipo de poder: {self.tipo_de_poder}
+        """
+        return representation
+        
         
 class Enemigo(Personaje):
-    enemigo_posible = ['Enano', 'Gigante', 'Mago']
-    def __init__(self,tipo_enemigo, caracteristicas):
+    enemigo_posible = {
+        'Enano': {'nombre':'Hassbulla', 'fuerza':100, 'inteligencia':100, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Fuego'},
+        'Mago': {'nombre':'El mago miado', 'fuerza':1000, 'inteligencia':50, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Aire'}
+    }
+    
+    def __init__(self,tipo_enemigo):
         self.tipo_enemigo = self.validar_tipo_enemigo(tipo_enemigo)
-        super().__init__(caracteristicas)
+        super().__init__(Caracteristicas(**Enemigo.enemigo_posible[tipo_enemigo]))
          
     def validar_tipo_enemigo(self, tipo_enemigo):
         if tipo_enemigo in self.enemigo_posible:
@@ -42,3 +57,6 @@ class Enemigo(Personaje):
 class Protagonista(Personaje):
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
+        
+enemigo1 = Enemigo('Mago')
+print(enemigo1)
