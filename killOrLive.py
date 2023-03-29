@@ -21,7 +21,7 @@ class Caracteristicas:
             return self.poder_posible[0]
         
 class Personaje:
-    def __init__(self, caracteristicas):
+    def __init__(self, caracteristicas: Caracteristicas):
         self.nombre = caracteristicas.nombre
         self.fuerza = caracteristicas.fuerza
         self.inteligencia = caracteristicas.inteligencia
@@ -64,11 +64,11 @@ class Personaje:
         print("***Daño***")
         return self.fuerza - enemigo.defensa
     
-    def atacar(self,enemigo): #metodo donde muestra el daño de ataque hacia el enemigo
+    def atacar(self, enemigo: 'Personaje'): #metodo donde muestra el daño de ataque hacia el enemigo
         daño = self.daño(enemigo)
         enemigo.vida = enemigo.vida - daño
         print(self.nombre, "ha realizado", daño, " puntos de daño a ", enemigo.nombre)
-        if enemigo.esta_vivo():
+        if enemigo.death_live():
             print("vida de ", enemigo.nombre, "es", enemigo.vida)
         else:
             enemigo.morir()
@@ -85,8 +85,8 @@ class Personaje:
         Tipo de poder: {self.tipo_de_poder}
         """
         return representation
-        
-        
+    
+    
 class Enemigo(Personaje):
     enemigo_posible = {
         'Enano': {'nombre':'Hassbulla', 'fuerza':100, 'inteligencia':100, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Fuego'},
@@ -103,6 +103,7 @@ class Enemigo(Personaje):
             return tipo_enemigo
         else:
             return self.enemigo_posible[0]
+        
 
 class Protagonista(Personaje):
     def __init__(self, caracteristicas):
