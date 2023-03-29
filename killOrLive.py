@@ -11,6 +11,8 @@ class Caracteristicas:
     inteligencia: int = 0
     defensa: int = 0
     vida: int = 0
+    recistencia = 0
+    suerte = 0
     
     def validar_tipo_de_poder(self, tipo_de_poder):
         if tipo_de_poder in self.poder_posible:
@@ -26,19 +28,10 @@ class Personaje:
         self.defensa = caracteristicas.defensa
         self.vida = caracteristicas.vida
         self.tipo_de_poder = caracteristicas.validar_tipo_de_poder(caracteristicas.tipo_de_poder)
+        self.recistencia = caracteristicas.recesistencia
+        self.suerte = caracteristicas.suerte
 
         print("Atributos base")
-    
-    def __init__(self, nombre, fuerza, inteligencia, defensa, vida, recesistencia, suerte): #Aqui estamos definiendo un constructor donde agregamos los atributos que tendra
-        #El objetivo que tenemos es cambiar los datos que se declararon arriba por los datos que recibe este constructor
-        self.nombre = nombre
-        self.fuerza = fuerza
-        self.inteligencia = inteligencia
-        self.defensa = defensa
-        self.vida = vida
-        self.recistencia = recesistencia
-        self.suerte = suerte
-
 
     def atributos(self):   #Se crea un metodo donde muestra el valor de sus atributos
         
@@ -79,6 +72,7 @@ class Personaje:
             print("vida de ", enemigo.nombre, "es", enemigo.vida)
         else:
             enemigo.morir()
+        print("La vida del enemigo es: ", enemigo.vida)
         print("****Nuevas estadisticas del enemigo:*****")
 
     def __repr__(self):
