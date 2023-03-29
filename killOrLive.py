@@ -7,12 +7,12 @@ class Caracteristicas:
     
     nombre: str
     tipo_de_poder: str
-    fuerza: int = 0
-    inteligencia: int = 0
-    defensa: int = 0
-    vida: int = 0
-    recistencia = 0
-    suerte = 0
+    fuerza: int = 100
+    inteligencia: int = 100
+    defensa: int = 100
+    vida: int = 100
+    recistencia = 100
+    suerte = 100
     
     def validar_tipo_de_poder(self, tipo_de_poder):
         if tipo_de_poder in self.poder_posible:
@@ -28,7 +28,7 @@ class Personaje:
         self.defensa = caracteristicas.defensa
         self.vida = caracteristicas.vida
         self.tipo_de_poder = caracteristicas.validar_tipo_de_poder(caracteristicas.tipo_de_poder)
-        self.recistencia = caracteristicas.recesistencia
+        self.recistencia = caracteristicas.recistencia
         self.suerte = caracteristicas.suerte
 
         print("Atributos base")
@@ -110,12 +110,12 @@ class Protagonista(Personaje):
         
 enemigo1 = Enemigo('Enano')
 print(enemigo1)
-mi_personaje = Personaje("Jesus", 10, 1, 5, 100, 20, 2)
-mi_personaje.atributos()
+
+caracteristicas = Caracteristicas('Jesus', 'Agua')
+mi_personaje = Personaje(caracteristicas)
 mi_personaje.level_up(1,2,0,3,5)
 mi_personaje.atributos()
 print(mi_personaje.death_live())
-mi_enemigo = Personaje("Enemy",10,1,5,100,20,2)
-print(mi_personaje.daño(mi_enemigo))
-mi_personaje.atacar(mi_enemigo)
-mi_enemigo.atributos()
+print(mi_personaje.daño(enemigo1))
+mi_personaje.atacar(enemigo1)
+enemigo1.atributos()
