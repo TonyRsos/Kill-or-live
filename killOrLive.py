@@ -25,7 +25,62 @@ class Personaje:
         self.defensa = caracteristicas.defensa
         self.vida = caracteristicas.vida
         self.tipo_de_poder = caracteristicas.validar_tipo_de_poder(caracteristicas.tipo_de_poder)
+
+        print("Atributos base")
+    
+    def __init__(self, nombre, fuerza, inteligencia, defensa, vida, recesistencia, suerte): #Aqui estamos definiendo un constructor donde agregamos los atributos que tendra
+        #El objetivo que tenemos es cambiar los datos que se declararon arriba por los datos que recibe este constructor
+        self.nombre = nombre
+        self.fuerza = fuerza
+        self.inteligencia = inteligencia
+        self.defensa = defensa
+        self.vida = vida
+        self.recistencia = recesistencia
+        self.suerte = suerte
+
+
+    def atributos(self):   #Se crea un metodo donde muestra el valor de sus atributos
         
+        print(self.nombre, ":", sep="")
+        print("·Fuerza:", self.fuerza)
+        print("·Inteligencia:", self.inteligencia)
+        print("·Defensa:", self.defensa)
+        print("·Vida:", self.vida)
+        print(".Recistencia:", self.recistencia)
+        print(".Suerte:", self.suerte)
+    
+    def level_up(self, fuerza, inteligencia, defensa, recistencia, suerte): #En este metodo nos indica el aumento en las estadisticas al subir de nivel el jugador
+        print("***Nuevas estadisticas de nivel***")
+        self.fuerza = self.fuerza + fuerza
+        self.inteligencia = self.inteligencia + inteligencia
+        self.defensa = self.defensa + defensa
+        self.recistencia = self.recistencia + recistencia
+        self.suerte = self.suerte + suerte + randrange(5, 27, 4) #Al agregar este atributo de suerte sera sumado a la base mas el random
+    
+    def death_live(self): #En este metodo se indica si el jugador esta vivo o muerto
+        print("*************")
+        print("El personaje esta:..")
+        if self.vida <= 0:
+            print("muerto")
+        elif self.vida > 0:
+            print("VIVO")
+        return self.vida > 0
+    
+    def daño(self,enemigo): #Metodo donde se implemente el daño al enemigo
+        print("***Daño***")
+        return self.fuerza - enemigo.defensa
+    
+    def atacar(self,enemigo): #metodo donde muestra el daño de ataque hacia el enemigo
+        daño = self.daño(enemigo)
+        enemigo.vida = enemigo.vida - daño
+        print(self.nombre, "ha realizado", daño, " puntos de daño a ", enemigo.nombre)
+        if enemigo.esta_vivo():
+            print("vida de ", enemigo.nombre, "es", enemigo.vida)
+        else:
+            enemigo.morir()
+        print("La vida del enemigo es: ", enemigo.vida)
+        print("****Nuevas estadisticas del enemigo:*****")
+
     def __repr__(self):
         representation = f"""
         Nombre: {self.nombre}
@@ -61,3 +116,12 @@ class Protagonista(Personaje):
         
 enemigo1 = Enemigo('Enano')
 print(enemigo1)
+mi_personaje = Personaje("Jesus", 10, 1, 5, 100, 20, 2)
+mi_personaje.atributos()
+mi_personaje.level_up(1,2,0,3,5)
+mi_personaje.atributos()
+print(mi_personaje.death_live())
+mi_enemigo = Personaje("Enemy",10,1,5,100,20,2)
+print(mi_personaje.daño(mi_enemigo))
+mi_personaje.atacar(mi_enemigo)
+mi_enemigo.atributos()
