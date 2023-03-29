@@ -59,5 +59,5 @@ class Protagonista(Personaje):
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
         
-enemigo1 = Enemigo('Mago')
+enemigo1 = Enemigo('Gigante')
 print(enemigo1)
