@@ -114,7 +114,7 @@ class Protagonista(Personaje):
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
         
-enemigo1 = Enemigo('Mago')
+enemigo1 = Enemigo('Enano')
 print(enemigo1)
 mi_personaje = Personaje("Jesus", 10, 1, 5, 100, 20, 2)
 mi_personaje.atributos()
