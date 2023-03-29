@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from random import randrange
 
 @dataclass
 class Caracteristicas:
@@ -78,7 +79,6 @@ class Personaje:
             print("vida de ", enemigo.nombre, "es", enemigo.vida)
         else:
             enemigo.morir()
-        print("La vida del enemigo es: ", enemigo.vida)
         print("****Nuevas estadisticas del enemigo:*****")
 
     def __repr__(self):
