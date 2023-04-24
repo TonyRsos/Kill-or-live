@@ -20,6 +20,7 @@ class Caracteristicas:
         else:
             return self.poder_posible[0]
         
+        
 class Personaje:
     def __init__(self, caracteristicas: Caracteristicas):
         self.nombre = caracteristicas.nombre
