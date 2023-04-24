@@ -11,15 +11,15 @@ class Caracteristicas:
     inteligencia: int = 100
     defensa: int = 100
     vida: int = 100
-    recistencia = 100
-    suerte = 100
+    recistencia: int = 100
+    suerte: int = 100
     
     def validar_tipo_de_poder(self, tipo_de_poder):
         if tipo_de_poder in self.poder_posible:
             return tipo_de_poder
         else:
             return self.poder_posible[0]
-        
+
 class Personaje:
     def __init__(self, caracteristicas: Caracteristicas):
         self.nombre = caracteristicas.nombre
@@ -33,8 +33,6 @@ class Personaje:
 
         print("Atributos base")
 
-
-
     def atributos(self):   #Se crea un metodo donde muestra el valor de sus atributos
         
         print(self.nombre, ":", sep="")
@@ -47,7 +45,7 @@ class Personaje:
     
     def level_up(self, fuerza, inteligencia, defensa, recistencia, suerte): #En este metodo nos indica el aumento en las estadisticas al subir de nivel el jugador
         print("***Nuevas estadisticas de nivel***")
-        self.fuerza = self.fuerza + fuerza + randrange(10, 15, 1)
+        self.fuerza = self.fuerza + fuerza
         self.inteligencia = self.inteligencia + inteligencia
         self.defensa = self.defensa + defensa
         self.recistencia = self.recistencia + recistencia
@@ -91,9 +89,9 @@ class Personaje:
     
 class Enemigo(Personaje):
     enemigo_posible = {
-        'Enano': {'nombre':'Hassbulla', 'fuerza':100, 'inteligencia':100, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Fuego'},
-        'Mago': {'nombre':'El mago miado', 'fuerza':1000, 'inteligencia':50, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Aire'},
-        'Gigante': {'nombre':'Big Show', 'fuerza':1500, 'inteligencia':50, 'defensa':50, 'vida':100, 'tipo_de_poder': 'Oscuridad'}
+        'Enano': {'nombre':'Hassbulla', 'fuerza':10, 'inteligencia':100, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Fuego'},
+        'Mago': {'nombre':'El mago miado', 'fuerza':15, 'inteligencia':50, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Aire'},
+        'Gigante': {'nombre':'Big Show', 'fuerza':20, 'inteligencia':50, 'defensa':50, 'vida':100, 'tipo_de_poder': 'Oscuridad'}
     }
     
     def __init__(self,tipo_enemigo):
@@ -106,30 +104,71 @@ class Enemigo(Personaje):
         else:
             return self.enemigo_posible[0]
         
+
 class Protagonista(Personaje):
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
-        
+
+class Protagonista(Personaje):
+    def _init_(self, caracteristicas):
+        super()._init_(caracteristicas)
+
+def seleccionar_poder():
+    print("Selecciona el tipo de poder que deseas:")
+    for idx, poder in enumerate(Caracteristicas.poder_posible):
+        print(f"{idx + 1}. {poder}")
+    opcion = int(input())
+    return Caracteristicas.poder_posible[opcion - 1]
 
 
-enemigo1 = Enemigo('Enano')
-
-caracteristicas = Caracteristicas('Jesus', 'Agua')
-mi_personaje = Personaje(caracteristicas)
-mi_personaje.level_up(1,2,0,3,5)
-mi_personaje.atributos()
-print(mi_personaje.death_live())
-print(mi_personaje.daño(enemigo1))
-print(enemigo1.death_live)
+def seleccionar_enemigo():
+    print("Selecciona el enemigo con el que deseas pelear:")
+    for idx, enemigo in enumerate(Enemigo.enemigo_posible):
+        print(f"{idx + 1}. {enemigo}")
+    opcion = int(input())
+    enemigo_key = list(Enemigo.enemigo_posible.keys())[opcion - 1]
+    return enemigo_key
 
 
-def decision(agent, target):
-    descicion = input('-Atacar \n-Defender \n-Huir \n--Escoje que hacer: ')
-    if descicion == 'Atacar': agent.daño(target)
-    elif descicion == 'Defender' : agent.daño = 0
-    elif descicion == 'Huir' : exit
+def menu_combate(protagonista, enemigo):
+    while protagonista.death_live() and enemigo.death_live():
+        print("\nAcciones:")
+        print("1. Atacar al enemigo")
+        print("2. Defender y contraatacar (recibir la mitad del daño y devolverlo al enemigo)")
+        print("3. Rendirse")
 
-decision(mi_personaje, enemigo1)
+        opcion = int(input())
 
-print(mi_personaje.daño(enemigo1))
-print(enemigo1.death_live)
+        if opcion == 1:
+            protagonista.atacar(enemigo)
+            enemigo.atacar(protagonista)
+        elif opcion == 2:
+            daño_enemigo = enemigo.daño(protagonista) // 2
+            protagonista.vida -= daño_enemigo
+            enemigo.vida -= daño_enemigo
+            print(f"{protagonista.nombre} ha defendido y contraatacado, causando {daño_enemigo} puntos de daño a {enemigo.nombre}")
+        elif opcion == 3:
+            print(f"{protagonista.nombre} se ha rendido.")
+            break
+        else:
+            print("Opción inválida. Intente nuevamente.")
+
+    if protagonista.vida <= 0:
+        print(f"{protagonista.nombre} ha perdido la batalla.")
+    elif enemigo.vida <= 0:
+        print(f"{protagonista.nombre} ha derrotado a {enemigo.nombre}.")
+
+
+def main():
+    nombre = input("Ingresa el nombre de tu personaje: ")
+    poder = seleccionar_poder()
+    caracteristicas = Caracteristicas(nombre=nombre, tipo_de_poder=poder)
+    protagonista = Protagonista(caracteristicas)
+
+    tipo_enemigo = seleccionar_enemigo()
+    enemigo = Enemigo(tipo_enemigo)
+
+    menu_combate(protagonista, enemigo)
+
+if __name__ == "__main__":
+    main()
