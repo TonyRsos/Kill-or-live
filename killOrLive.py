@@ -130,3 +130,6 @@ def decision(agent, target):
     elif descicion == 'Huir' : exit
 
 decision(mi_personaje, enemigo1)
+
+print(mi_personaje.daño(enemigo1))
+print(enemigo1.death_live)
