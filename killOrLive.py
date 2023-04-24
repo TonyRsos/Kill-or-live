@@ -60,9 +60,13 @@ class Personaje:
             print("VIVO")
         return self.vida > 0
     
-    def daño(self,enemigo): #Metodo donde se implemente el daño al enemigo
+    def daño(self, enemigo: 'Personaje'): #Metodo donde se implemente el daño al enemigo
         print("***Daño***")
-        return self.fuerza - enemigo.defensa
+        dano = self.fuerza - enemigo.defensa
+        if dano > 50:
+            return dano
+        else:
+            return 0
     
     def atacar(self, enemigo: 'Personaje'): #metodo donde muestra el daño de ataque hacia el enemigo
         daño = self.daño(enemigo)
@@ -94,15 +98,15 @@ class Enemigo(Personaje):
         'Gigante': {'nombre':'Big Show', 'fuerza':20, 'inteligencia':50, 'defensa':50, 'vida':100, 'tipo_de_poder': 'Oscuridad'}
     }
     
-    def __init__(self,tipo_enemigo):
+    def __init__(self, tipo_enemigo = 'Enano'):
         self.tipo_enemigo = self.validar_tipo_enemigo(tipo_enemigo)
-        super().__init__(Caracteristicas(**Enemigo.enemigo_posible[tipo_enemigo]))
+        super().__init__(Caracteristicas(**Enemigo.enemigo_posible[self.tipo_enemigo]))
          
     def validar_tipo_enemigo(self, tipo_enemigo):
         if tipo_enemigo in self.enemigo_posible:
             return tipo_enemigo
         else:
-            return self.enemigo_posible[0]
+            return list(self.enemigo_posible.keys())[0]
         
 
 class Protagonista(Personaje):
@@ -130,7 +134,7 @@ def seleccionar_enemigo():
     return enemigo_key
 
 
-def menu_combate(protagonista, enemigo):
+def menu_combate(protagonista: Protagonista, enemigo: Enemigo):
     while protagonista.death_live() and enemigo.death_live():
         print("\nAcciones:")
         print("1. Atacar al enemigo")
