@@ -20,6 +20,8 @@ class Caracteristicas:
         else:
             return self.poder_posible[0]
         
+    def mostrar_menu():
+        pass
         
 class Personaje:
     def __init__(self, caracteristicas: Caracteristicas):
@@ -34,8 +36,6 @@ class Personaje:
 
         print("Atributos base")
 
-
-
     def atributos(self):   #Se crea un metodo donde muestra el valor de sus atributos
         
         print(self.nombre, ":", sep="")
@@ -48,7 +48,7 @@ class Personaje:
     
     def level_up(self, fuerza, inteligencia, defensa, recistencia, suerte): #En este metodo nos indica el aumento en las estadisticas al subir de nivel el jugador
         print("***Nuevas estadisticas de nivel***")
-        self.fuerza = self.fuerza + fuerza + randrange(10, 15, 1)
+        self.fuerza = self.fuerza + fuerza
         self.inteligencia = self.inteligencia + inteligencia
         self.defensa = self.defensa + defensa
         self.recistencia = self.recistencia + recistencia
@@ -107,13 +107,13 @@ class Enemigo(Personaje):
         else:
             return self.enemigo_posible[0]
         
+
 class Protagonista(Personaje):
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
         
-
-
 enemigo1 = Enemigo('Enano')
+print(enemigo1)
 
 caracteristicas = Caracteristicas('Jesus', 'Agua')
 mi_personaje = Personaje(caracteristicas)
@@ -121,13 +121,5 @@ mi_personaje.level_up(1,2,0,3,5)
 mi_personaje.atributos()
 print(mi_personaje.death_live())
 print(mi_personaje.daño(enemigo1))
-print(enemigo1.death_live)
-
-
-def decision(agent, target):
-    descicion = input('-Atacar \n-Defender \n-Huir \n--Escoje que hacer: ')
-    if descicion == 'Atacar': agent.daño(target)
-    elif descicion == 'Defender' : agent.daño = 0
-    elif descicion == 'Huir' : exit
-
-decision(mi_personaje, enemigo1)
+mi_personaje.atacar(enemigo1)
+enemigo1.atributos()
