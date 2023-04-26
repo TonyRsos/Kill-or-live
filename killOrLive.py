@@ -10,7 +10,7 @@ class Caracteristicas:
     fuerza: int = 100
     inteligencia: int = 100
     defensa: int = 100
-    vida: int = 100
+    vida: int = 1000
     recistencia: int = 100
     suerte: int = 100
     
@@ -63,7 +63,7 @@ class Personaje:
     def daño(self, enemigo: 'Personaje'): #Metodo donde se implemente el daño al enemigo
         print("***Daño***")
         dano = self.fuerza - enemigo.defensa
-        if dano > 50:
+        if dano > 0:
             return dano
         else:
             return 0
@@ -93,9 +93,9 @@ class Personaje:
     
 class Enemigo(Personaje):
     enemigo_posible = {
-        'Enano': {'nombre':'Hassbulla', 'fuerza':10, 'inteligencia':100, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Fuego'},
-        'Mago': {'nombre':'El mago miado', 'fuerza':15, 'inteligencia':50, 'defensa':100, 'vida':100, 'tipo_de_poder': 'Aire'},
-        'Gigante': {'nombre':'Big Show', 'fuerza':20, 'inteligencia':50, 'defensa':50, 'vida':100, 'tipo_de_poder': 'Oscuridad'}
+        'Enano': {'nombre':'Hassbulla', 'fuerza':200, 'inteligencia':100, 'defensa':100, 'vida':1000, 'tipo_de_poder': 'Fuego'},
+        'Mago': {'nombre':'El mago miado', 'fuerza':150, 'inteligencia':50, 'defensa':100, 'vida':1000, 'tipo_de_poder': 'Aire'},
+        'Gigante': {'nombre':'Big Show', 'fuerza':200, 'inteligencia':50, 'defensa':50, 'vida':1000, 'tipo_de_poder': 'Oscuridad'}
     }
     
     def __init__(self, tipo_enemigo = 'Enano'):
