@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from random import randrange
+from abc import ABC, abstractmethod
 
 @dataclass
 class Caracteristicas:
@@ -20,6 +21,11 @@ class Caracteristicas:
         else:
             return self.poder_posible[0]
 
+class SerVivo(ABC):
+    @abstractmethod
+    def hablar(self):
+        pass
+    
 class Personaje:
     def __init__(self, caracteristicas: Caracteristicas):
         self.nombre = caracteristicas.nombre
@@ -89,6 +95,8 @@ class Personaje:
         Tipo de poder: {self.tipo_de_poder}
         """
         return representation
+
+    
     
     
 class Enemigo(Personaje):
@@ -108,14 +116,16 @@ class Enemigo(Personaje):
         else:
             return list(self.enemigo_posible.keys())[0]
         
+    def hablar(self):
+        print("Grrr, soy el enemigo", self.tipo_enemigo)
+        
 
 class Protagonista(Personaje):
     def __init__(self, caracteristicas):
         super().__init__(caracteristicas)
-
-class Protagonista(Personaje):
-    def _init_(self, caracteristicas):
-        super()._init_(caracteristicas)
+    def hablar(self):
+        print("Hola, soy el personaje", self.nombre)
+        
 
 def seleccionar_poder():
     print("Selecciona el tipo de poder que deseas:")
@@ -168,11 +178,13 @@ def main():
     poder = seleccionar_poder()
     caracteristicas = Caracteristicas(nombre=nombre, tipo_de_poder=poder)
     protagonista = Protagonista(caracteristicas)
-
+    protagonista.hablar()
+    
     tipo_enemigo = seleccionar_enemigo()
     enemigo = Enemigo(tipo_enemigo)
+    enemigo.hablar()
 
     menu_combate(protagonista, enemigo)
-
+    
 if __name__ == "__main__":
     main()
