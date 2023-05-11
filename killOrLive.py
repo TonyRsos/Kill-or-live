@@ -178,11 +178,13 @@ def main():
     poder = seleccionar_poder()
     caracteristicas = Caracteristicas(nombre=nombre, tipo_de_poder=poder)
     protagonista = Protagonista(caracteristicas)
-    protagonista.hablar()
     
     tipo_enemigo = seleccionar_enemigo()
     enemigo = Enemigo(tipo_enemigo)
-    enemigo.hablar()
+    
+    characters = [protagonista, enemigo]
+    for character in characters:
+        character.hablar()
 
     menu_combate(protagonista, enemigo)
     
